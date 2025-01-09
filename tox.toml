@@ -1,0 +1,23 @@
+requires = ["tox>=4.23.2"]
+deps = ["tox-uv", "uv"]
+env_list = ["test", "checks"]
+no_package = true
+
+[env_run_base]
+#runner = "uv-venv-lock-runner"
+runner = "uv-venv-runner"
+# commands = [["uv", "sync"]]
+
+[env.test]
+description = "Run test under {base_python}"
+with_dev = true
+dependency_groups = ["testing"]
+commands = [
+	["uv", "pip", "freeze"]
+]
+
+[env.checks]
+description = "Run checks under {base_python}"
+with_dev = "{[test]with_dev}"
+dependency_groups = ["typing"]
+commands = [["uv", "pip", "freeze"]]

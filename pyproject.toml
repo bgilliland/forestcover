@@ -1,0 +1,32 @@
+[project]
+name = "forest-covertypes"
+version = "0.1.0"
+description = "Machine Learning Production Template"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "feature-engine>=1.8.2",
+    "numpy>=2.0.2",
+    "pandas>=2.2.3",
+    "pydantic>=2.10.4",
+    "scikit-learn>=1.5.2",
+    "setuptools>=75.7.0",
+    "strictyaml>=1.7.3",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "seaborn>=0.13.2",
+    "matplotlib>=3.9.2",
+
+]
+testing = [
+    "pytest>=8.3.4",
+]
+typing = [
+    "black>=24.10.0",
+    "flake8>=7.1.1",
+    "isort>=5.13.2",
+    "mypy>=1.14.1",
+]

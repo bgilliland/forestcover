@@ -1,0 +1,42 @@
+# Package Overview
+package_name: regression_model
+
+# Data Files
+training_data_file: train.csv
+test_data_file: test.csv
+
+# Variables
+# The variable we are attempting to predict
+target: targetName
+
+pipeline_name: _model
+pipeline_save_file: _model_output_v
+
+# Will cause syntax errors
+variables_to_rename:
+  badvarName: newName
+
+features:
+  - varNames
+
+# set train/test split
+test_size: 0.2
+
+# seed
+random_state: 711
+
+# Hyperparameters
+alpha: .001
+
+# Other necessary feature remappings/engineerings
+categorical_vars:
+  - 'var'
+
+categorical_vars_with_na_frequent:
+  - 'var'
+
+categorical_vars_with_na_missing:
+  - 'var'
+
+numerical_vars_with_na: 
+  - 'var'
