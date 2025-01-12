@@ -3,6 +3,7 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
+from sklearn.datasets import fetch_covtype
 from sklearn.pipeline import Pipeline
 
 from _model import __version__ as _version
@@ -10,11 +11,21 @@ from _model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
 
 def load_dataset(*, file_name: str) -> pd.DataFrame:
-    dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
-
-    # rename variables beginning with numbers to avoid syntax errors later
-    transformed = dataframe.rename(columns=config.model_config.variables_to_rename)
-    return transformed
+    try:
+        dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
+    except FileNotFoundError:
+        dataframe = fetch_covtype(as_frame=True).frame
+        for var in config.model_settings.categorical_vars:
+            cols = [col for col in dataframe.columns if var in col]
+            dataframe[var] = pd.Categorical(
+                dataframe[cols].idxmax(axis=1).str.replace(f"{var}_", "")
+            )
+            dataframe.drop(columns=cols, inplace=True)
+        dataframe.to_csv(Path(f"{DATASET_DIR}/{file_name}"), index=False)
+    dataframe[config.model_settings.target] = pd.Categorical(
+        dataframe[config.model_settings.target]
+    )
+    return dataframe
 
 
 def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:

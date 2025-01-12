@@ -7,17 +7,28 @@ no_package = true
 #runner = "uv-venv-lock-runner"
 runner = "uv-venv-runner"
 # commands = [["uv", "sync"]]
+setenv = {PYTHONPATH = ".", PYTHONHASHSEED = "0"}
 
 [env.test]
-description = "Run test under {base_python}"
+description = "Run tests under {base_python}"
 with_dev = true
 dependency_groups = ["testing"]
 commands = [
-	["uv", "pip", "freeze"]
+	["uv", "run", "pytest", "-s", "-vv"]
 ]
 
 [env.checks]
 description = "Run checks under {base_python}"
 with_dev = "{[test]with_dev}"
 dependency_groups = ["typing"]
-commands = [["uv", "pip", "freeze"]]
+ignore_errors = true
+commands = [
+	["flake8", "_model", "tests"],
+	["black", "--check", "--diff", "."],
+	["isort", "--check", "--diff", "."],
+	["mypy", "_model", "tests"]
+]
+
+[env.train]
+description = "Train the model"
+commands = [["uv", "run", "_model/train_pipeline.py"]]

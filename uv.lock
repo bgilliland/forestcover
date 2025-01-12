@@ -490,6 +490,7 @@ dev = [
     { name = "seaborn" },
 ]
 testing = [
+    { name = "pydantic" },
     { name = "pytest" },
 ]
 typing = [
@@ -516,7 +517,10 @@ dev = [
     { name = "matplotlib", specifier = ">=3.9.2" },
     { name = "seaborn", specifier = ">=0.13.2" },
 ]
-testing = [{ name = "pytest", specifier = ">=8.3.4" }]
+testing = [
+    { name = "pydantic", specifier = ">=2.10.4" },
+    { name = "pytest", specifier = ">=8.3.4" },
+]
 typing = [
     { name = "black", specifier = ">=24.10.0" },
     { name = "flake8", specifier = ">=7.1.1" },

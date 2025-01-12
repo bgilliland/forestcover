@@ -1,6 +1,6 @@
 import typing as t
 
-import numpy as np
+# import numpy as np
 import pandas as pd
 
 from _model import __version__ as _version
@@ -24,10 +24,10 @@ def make_prediction(
 
     if not errors:
         predictions = _price_pipe.predict(
-            X=validated_data[config.model_config.features]
+            X=validated_data[config.model_settings.features]
         )
         results = {
-            "predictions": [np.exp(pred) for pred in predictions],  # type: ignore
+            "predictions": predictions,
             "version": _version,
             "errors": errors,
         }

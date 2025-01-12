@@ -1,8 +1,9 @@
 # setup.py
 from pathlib import Path
+
 from setuptools import find_packages, setup
 
-NAME = 'ml-template'
+NAME = "ml-template"
 DESCRIPTION = "Example ML model directory package."
 URL = "https://github.com/bgilliland/ml-template"
 EMAIL = "bagilliland5328@gmail.com"
@@ -12,7 +13,7 @@ REQUIRES_PYTHON = ">=3.9.0"
 long_description = DESCRIPTION
 about = {}
 ROOT_DIR = Path(__file__).resolve().parent
-PACKAGE_DIR = ROOT_DIR / '_model'
+PACKAGE_DIR = ROOT_DIR / "_model"
 with open(PACKAGE_DIR / "VERSION") as f:
     _version = f.read().strip()
     about["__version__"] = _version

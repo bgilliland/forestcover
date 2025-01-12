@@ -22,6 +22,7 @@ dev = [
 
 ]
 testing = [
+    "pydantic>=2.10.4",
     "pytest>=8.3.4",
 ]
 typing = [
@@ -30,3 +31,6 @@ typing = [
     "isort>=5.13.2",
     "mypy>=1.14.1",
 ]
+
+[tool.black]
+line-length = 79
